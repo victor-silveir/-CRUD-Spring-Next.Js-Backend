@@ -4,8 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +24,7 @@ import com.example.crud.dtos.PostClienteDTO;
 import com.example.crud.entities.Cliente;
 import com.example.crud.services.ClienteService;
 
+@Validated
 @RestController
 @RequestMapping(value = "/clientes")
 public class ClienteController {
@@ -29,7 +33,7 @@ public class ClienteController {
 	ClienteService clienteService;
 
 	@PostMapping(value = "/")
-	public ResponseEntity<Cliente> postCliente(@RequestBody PostClienteDTO clienteDTO) {
+	public ResponseEntity<Cliente> postCliente(@Valid @RequestBody PostClienteDTO clienteDTO) {
 		Cliente cliente = clienteService.toCliente(clienteDTO);
 		cliente = clienteService.save(cliente);
 		URI clienteURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId())
