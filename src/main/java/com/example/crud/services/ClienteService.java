@@ -39,6 +39,7 @@ public class ClienteService {
 	
 	public Cliente update(Integer id, Cliente cliente) {
 		cliente.setId(id);
+		cliente.getTelefones();
 		addTelefone(cliente);
 		return clienteRepository.save(cliente);
 	}

@@ -19,6 +19,8 @@ import lombok.Setter;
 public class Telefone {
 
 	@Id
+	@Getter
+	@Setter
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 

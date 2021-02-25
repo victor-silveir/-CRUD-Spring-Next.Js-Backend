@@ -34,7 +34,7 @@ public class Cliente implements Serializable{
 	@CollectionTable(name = "emails")
 	private Set<String> emails = new HashSet<>();
 	
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Telefone> telefones;
 		
 }
