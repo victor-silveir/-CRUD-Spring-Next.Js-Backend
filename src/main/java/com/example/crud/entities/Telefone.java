@@ -4,9 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.example.crud.enums.TipoTelefone;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,21 +26,27 @@ public class Telefone {
 
 	@Getter
 	@Setter
-	private String códigoEstado;
+	private String codigoEstado;
+	
 	@Getter
 	@Setter
 	private String numero;
 	
 	@ManyToOne
-	@Getter
 	@Setter
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
-	public Telefone(TipoTelefone tipo, String códigoEstado, String numero) {
+	public Telefone(TipoTelefone tipo, String codigoEstado, String numero) {
 		super();
 		this.tipo = tipo.getCod();
-		this.códigoEstado = códigoEstado;
+		this.codigoEstado = codigoEstado;
 		this.numero = numero;
+	}
+	
+	@JsonIgnore
+	public Cliente getCliente() {
+		return cliente;
 	}
 
 	public TipoTelefone getTipo() {
