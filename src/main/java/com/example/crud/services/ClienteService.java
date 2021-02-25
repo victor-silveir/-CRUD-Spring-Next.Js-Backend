@@ -11,6 +11,7 @@ import com.example.crud.dtos.GetClienteDTO;
 import com.example.crud.dtos.PostClienteDTO;
 import com.example.crud.entities.Cliente;
 import com.example.crud.entities.Telefone;
+import com.example.crud.exceptions.ObjectNotFoundException;
 import com.example.crud.repositories.ClienteRepository;
 
 @Service
@@ -33,12 +34,12 @@ public class ClienteService {
 
 	public Cliente findById(Integer id) {
 		Optional<Cliente> clienteOpt = clienteRepository.findById(id);
-		return clienteOpt.get();
-
+		return clienteOpt.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getSimpleName()));
 	}
 	
 	public Cliente update(Integer id, Cliente cliente) {
 		cliente.setId(id);
+		findById(cliente.getId());
 		cliente.getTelefones();
 		addTelefone(cliente);
 		return clienteRepository.save(cliente);
