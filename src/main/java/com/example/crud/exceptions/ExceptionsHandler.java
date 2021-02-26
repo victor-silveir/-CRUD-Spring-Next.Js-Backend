@@ -23,8 +23,15 @@ public class ExceptionsHandler {
 	@ExceptionHandler(ObjectNotFoundException.class)
 	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest req) {
 		
-		StandardError erro = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), df.format(new Date()));
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+		StandardError error = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), df.format(new Date()));
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+	}
+	
+	@ExceptionHandler(ObjectAlreadySavedException.class)
+	public ResponseEntity<StandardError> objectAlreadySaved(ObjectAlreadySavedException e, HttpServletRequest req) {
+		
+		StandardError error = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), df.format(new Date()));
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)

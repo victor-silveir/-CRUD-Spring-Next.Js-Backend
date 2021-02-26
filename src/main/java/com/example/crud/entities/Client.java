@@ -20,26 +20,26 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Data
-public class Cliente implements Serializable{
+public class Client implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;	
+	private String name;	
 	private String cpf;
-	private String cep;
-	private String logradouro;
-	private String complemento;
-	private String bairro;
-	private String cidade;
-	private String uf;
+	private String zipCode;
+	private String address;
+	private String complement;
+	private String district;
+	private String city;
+	private String state;
 	
 	@ElementCollection
 	@CollectionTable(name = "emails")
 	private Set<String> emails = new HashSet<>();
 	
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Telefone> telefones;
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Phone> phones;
 		
 }

@@ -5,9 +5,9 @@ import java.util.Collection;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class EmailIsEmptyValidation implements ConstraintValidator<EmailIsEmpty, Collection<String>> {
+public class EmailIsNotEmptyValidation implements ConstraintValidator<EmailIsNotEmpty, Collection<String>> {
 	@Override
-	public void initialize(EmailIsEmpty annotation) {
+	public void initialize(EmailIsNotEmpty annotation) {
 	}
 
 	@Override

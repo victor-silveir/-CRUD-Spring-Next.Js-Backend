@@ -8,13 +8,13 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.crud.entities.Cliente;
-import com.example.crud.repositories.ClienteRepository;
+import com.example.crud.entities.Client;
+import com.example.crud.repositories.ClientRepository;
 
 public class EmailNotRepeatedValidation implements ConstraintValidator<EmailNotRepeated, Collection<String>> {
 	
 	@Autowired
-	ClienteRepository clienteRepository;
+	ClientRepository clientRepository;
 	
 	@Override
 	public void initialize(EmailNotRepeated annotation) {
@@ -24,10 +24,10 @@ public class EmailNotRepeatedValidation implements ConstraintValidator<EmailNotR
 	public boolean isValid(Collection<String> emails, ConstraintValidatorContext context) {
 
 		
-			List<Cliente> cli = clienteRepository.findByEmailsIn(emails);
+			List<Client> cli = clientRepository.findByEmailsIn(emails);
 			
-			for (Cliente cliente : cli) {
-				if (cliente != null) {
+			for (Client client : cli) {
+				if (client != null) {
 					return false;
 				}
 			}

@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-import com.example.crud.enums.TipoTelefone;
+import com.example.crud.enums.PhoneType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
@@ -21,7 +21,7 @@ import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
-public class Telefone implements Serializable{
+public class Phone implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -31,42 +31,42 @@ public class Telefone implements Serializable{
 	private Integer id;
 
 	@NotNull(message="O campo Tipo deve ser informado.")
-	private Integer tipo;
+	private Integer type;
 
 	@Getter
 	@Setter
 	@NotEmpty(message="O campo Código deve ser informado.")
-	private String codigoEstado;
+	private String stateCode;
 	
 	@Getter
 	@Setter
 	@NotEmpty(message="O campo Telefone deve ser informado.")
 	@Pattern(regexp="^(0|[1-9][0-9]*)$", message="Formato de Telefone inválido, apenas números são permitidos.")
-	private String numero;
+	private String number;
 	
 	@ManyToOne
 	@Setter
-	@JoinColumn(name = "cliente_id")
-	private Cliente cliente;
+	@JoinColumn(name = "client_id")
+	private Client client;
 
-	public Telefone(TipoTelefone tipo, String codigoEstado, String numero) {
+	public Phone(PhoneType type, String stateCode, String number) {
 		super();
-		this.tipo = tipo.getCod();
-		this.codigoEstado = codigoEstado;
-		this.numero = numero;
+		this.type = type.getCod();
+		this.stateCode = stateCode;
+		this.number = number;
 	}
 	
 	@JsonIgnore
-	public Cliente getCliente() {
-		return cliente;
+	public Client getCliente() {
+		return client;
 	}
 
-	public TipoTelefone getTipo() {
-		return TipoTelefone.toEnum(tipo);
+	public PhoneType getTipo() {
+		return PhoneType.toEnum(type);
 	}
 
-	public void setTipo(TipoTelefone tipo) {
-		this.tipo = tipo.getCod();
+	public void setTipo(PhoneType type) {
+		this.type = type.getCod();
 	}
 
 }

@@ -6,9 +6,9 @@ import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class EmailValidation implements ConstraintValidator<EmailList, Collection<String>> {
+public class EmailValidation implements ConstraintValidator<EmailIsValid, Collection<String>> {
 	@Override
-	public void initialize(EmailList annotation) {
+	public void initialize(EmailIsValid annotation) {
 	}
 
 	@Override

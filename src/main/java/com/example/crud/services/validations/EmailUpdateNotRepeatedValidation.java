@@ -11,13 +11,13 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
-import com.example.crud.entities.Cliente;
-import com.example.crud.repositories.ClienteRepository;
+import com.example.crud.entities.Client;
+import com.example.crud.repositories.ClientRepository;
 
 public class EmailUpdateNotRepeatedValidation implements ConstraintValidator<EmailUpdateNotRepeated, Collection<String>> {
 	
 	@Autowired
-	ClienteRepository clienteRepository;
+	ClientRepository clientRepository;
 	
 	@Autowired
 	HttpServletRequest req;
@@ -35,11 +35,11 @@ public class EmailUpdateNotRepeatedValidation implements ConstraintValidator<Ema
 			Integer idUri = Integer.parseInt(map.get("id"));
 
 		
-			List<Cliente> cli = clienteRepository.findByEmailsIn(emails);
+			List<Client> cli = clientRepository.findByEmailsIn(emails);
 			
 			
-			for (Cliente cliente : cli) {
-				if (cliente != null && !idUri.equals(cliente.getId())) {
+			for (Client client : cli) {
+				if (client != null && !idUri.equals(client.getId())) {
 					return false;
 				}
 			}

@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = EmailValidation.class)
 @Documented
-public @interface EmailList {
+public @interface EmailIsValid {
     String message() default "E-mail inválido.";
 
     Class<?>[] groups() default {};

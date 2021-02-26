@@ -11,9 +11,9 @@ import javax.validation.Payload;
 
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = EmailIsEmptyValidation.class)
+@Constraint(validatedBy = EmailIsNotEmptyValidation.class)
 @Documented
-public @interface EmailIsEmpty {
+public @interface EmailIsNotEmpty {
     String message() default "É necessário preencher pelo o menos 1 E-mail.";
 
     Class<?>[] groups() default {};

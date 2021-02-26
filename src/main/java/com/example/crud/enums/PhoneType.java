@@ -1,18 +1,18 @@
 package com.example.crud.enums;
 
 
-public enum TipoTelefone {
+public enum PhoneType {
 	
 	RESIDENCIAL(1, "Residencial"),
 	COMERCIAL(2, "Comercial"),
 	CELULAR(3, "Celular");
 	
 	private int cod;
-	private String descricao;
+	private String description;
 	
-	private TipoTelefone(int cod, String descricao) {
+	private PhoneType(int cod, String description) {
 		this.cod = cod;
-		this.descricao = descricao;
+		this.description = description;
 	}
 
 	public int getCod() {
@@ -20,16 +20,16 @@ public enum TipoTelefone {
 	}
 
 	public String getDescricao() {
-		return descricao;
+		return description;
 	}
 
-	public static TipoTelefone toEnum(Integer cod ) {
+	public static PhoneType toEnum(Integer cod ) {
 		
 		if(cod == null) {
 			return null;
 		}
 		
-		for(TipoTelefone x : TipoTelefone.values()) {
+		for(PhoneType x : PhoneType.values()) {
 			if(cod.equals(x.getCod())) {
 				return x;
 			}
