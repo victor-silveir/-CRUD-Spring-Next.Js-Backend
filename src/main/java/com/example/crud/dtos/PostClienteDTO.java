@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -23,8 +24,10 @@ public class PostClienteDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@NotEmpty(message="O campo Nome deve ser preenchido.")
+	@Size(min = 3, max = 100, message = "O campo Nome deve ter entre 3 e 100 caracteres.")
 	@Pattern(regexp ="^[a-zA-Z0-9 ]+$", message="O campo nome deve ser preenchido apenas com caracteres alfanuméricos")
 	private String nome;
+	
 	@NotEmpty(message="O campo CPF deve ser preenchido.")
 	@CPF(message="CPF inválido")
 	private String cpf;

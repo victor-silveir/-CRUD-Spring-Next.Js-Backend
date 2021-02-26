@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.example.crud.enums.TipoTelefone;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,14 +30,18 @@ public class Telefone implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	@NotNull(message="O campo Tipo deve ser informado.")
 	private Integer tipo;
 
 	@Getter
 	@Setter
+	@NotEmpty(message="O campo Código deve ser informado.")
 	private String codigoEstado;
 	
 	@Getter
 	@Setter
+	@NotEmpty(message="O campo Telefone deve ser informado.")
+	@Pattern(regexp="^(0|[1-9][0-9]*)$", message="Formato de Telefone inválido, apenas números são permitidos.")
 	private String numero;
 	
 	@ManyToOne

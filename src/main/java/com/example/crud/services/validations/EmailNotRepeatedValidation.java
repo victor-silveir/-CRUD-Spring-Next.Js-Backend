@@ -24,12 +24,13 @@ public class EmailNotRepeatedValidation implements ConstraintValidator<EmailNotR
 	public boolean isValid(Collection<String> emails, ConstraintValidatorContext context) {
 
 		
-		for (String s : emails) {
 			List<Cliente> cli = clienteRepository.findByEmailsIn(emails);
-			if (cli != null) {
-				return false;
+			
+			for (Cliente cliente : cli) {
+				if (cliente != null) {
+					return false;
+				}
 			}
-		}
 		return true;
 
 	}

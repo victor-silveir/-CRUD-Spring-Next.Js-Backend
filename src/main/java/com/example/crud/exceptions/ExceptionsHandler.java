@@ -5,7 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 
+import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -32,6 +35,18 @@ public class ExceptionsHandler {
 		
 		for (FieldError error : e.getBindingResult().getFieldErrors()) {
 			erro.addError(error.getField(), error.getDefaultMessage());
+		}
+			
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+	}
+	
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<StandardError> validation(ConstraintViolationException e, HttpServletRequest req) {
+		
+		ValidationError erro = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Erro de Validação", df.format(new Date()));
+		
+		for (ConstraintViolation<?> error : e.getConstraintViolations()) {
+			erro.addError("telefone", error.getMessage());
 		}
 			
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
