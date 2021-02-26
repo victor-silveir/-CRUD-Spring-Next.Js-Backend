@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.crud.dtos.GetClienteDTO;
 import com.example.crud.dtos.PostClienteDTO;
+import com.example.crud.dtos.UpdateClienteDTO;
 import com.example.crud.entities.Cliente;
 import com.example.crud.entities.Telefone;
 import com.example.crud.exceptions.ObjectNotFoundException;
@@ -39,7 +40,7 @@ public class ClienteService {
 	
 	public Cliente update(Integer id, Cliente cliente) {
 		cliente.setId(id);
-		findById(cliente.getId());
+		cliente.setCpf(findById(cliente.getId()).getCpf());
 		cliente.getTelefones();
 		addTelefone(cliente);
 		return clienteRepository.save(cliente);
@@ -55,6 +56,10 @@ public class ClienteService {
 	}
 	
 	public Cliente toCliente(GetClienteDTO clienteDTO) {
+		return modelMapper.map(clienteDTO, Cliente.class);
+	}
+	
+	public Cliente toCliente(UpdateClienteDTO clienteDTO) {
 		return modelMapper.map(clienteDTO, Cliente.class);
 	}
 

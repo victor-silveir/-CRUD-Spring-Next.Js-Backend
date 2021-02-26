@@ -21,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.crud.dtos.GetClienteDTO;
 import com.example.crud.dtos.PostClienteDTO;
+import com.example.crud.dtos.UpdateClienteDTO;
 import com.example.crud.entities.Cliente;
 import com.example.crud.services.ClienteService;
 
@@ -56,7 +57,7 @@ public class ClienteController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Cliente> putCliente(@PathVariable Integer id, @RequestBody GetClienteDTO clienteDTO) {
+	public ResponseEntity<Cliente> putCliente(@PathVariable Integer id, @Valid @RequestBody UpdateClienteDTO clienteDTO) {
 		Cliente cliente = clienteService.update(id, clienteService.toCliente(clienteDTO));
 		return ResponseEntity.ok().body(cliente);
 	}
