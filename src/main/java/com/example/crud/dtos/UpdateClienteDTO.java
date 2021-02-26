@@ -25,6 +25,25 @@ public class UpdateClienteDTO {
 	@Pattern(regexp ="^[a-zA-Z0-9 ]+$", message="O campo nome deve ser preenchido apenas com caracteres alfanuméricos")
 	private String nome;
 	
+	@NotEmpty(message="O campo CEP deve ser preenchido.")
+	@Pattern(regexp="^(0|[1-9][0-9]*)$", message="Formato de CEP inválido, apenas números são permitidos.")
+	private String cep;
+	
+	@NotEmpty(message="O campo Logradouro deve ser preenchido.")
+	private String logradouro;
+	
+	@NotEmpty(message="O campo Complemento deve ser preenchido.")
+	private String complemento;
+	
+	@NotEmpty(message="O campo Bairro deve ser preenchido.")
+	private String bairro;
+	
+	@NotEmpty(message="O campo Cidade deve ser preenchido.")
+	private String cidade;
+	
+	@NotEmpty(message="O campo Estado deve ser preenchido.")
+	private String uf;
+	
 	@EmailUpdateNotRepeated
 	@EmailList
 	@EmailIsEmpty

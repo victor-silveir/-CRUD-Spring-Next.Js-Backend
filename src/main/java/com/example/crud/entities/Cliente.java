@@ -28,6 +28,12 @@ public class Cliente implements Serializable{
 	private Integer id;
 	private String nome;	
 	private String cpf;
+	private String cep;
+	private String logradouro;
+	private String complemento;
+	private String bairro;
+	private String cidade;
+	private String uf;
 	
 	@ElementCollection
 	@CollectionTable(name = "emails")

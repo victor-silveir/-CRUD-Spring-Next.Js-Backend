@@ -17,5 +17,11 @@ public class GetClienteDTO {
 	private String cpf;
 	private Set<String> emails;
 	private List<Telefone> telefones;
+	private String cep;
+	private String logradouro;
+	private String complemento;
+	private String bairro;
+	private String cidade;
+	private String uf;
 	
 }
