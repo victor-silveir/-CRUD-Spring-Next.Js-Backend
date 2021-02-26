@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.crud.dtos.GetClientDTO;
@@ -24,6 +25,9 @@ public class ClientService {
 
 	@Autowired
 	ModelMapper modelMapper;
+	
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	public List<Client> findAll() {
 		return clientRepository.findAll();
@@ -31,7 +35,7 @@ public class ClientService {
 
 	public Client save(Client client) {
 		client.setId(null);
-			
+		client.setPassword(bCryptPasswordEncoder.encode(client.getPassword()));	
 		if (clientRepository.findByCpf(client.getCpf()) != null) {
 			throw new ObjectAlreadySavedException("Cliente com esse CPF já cadastrado, verifique o CPF informado. CPF: " + client.getCpf());
 		}

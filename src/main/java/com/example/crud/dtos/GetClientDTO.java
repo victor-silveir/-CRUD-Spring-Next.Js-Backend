@@ -13,6 +13,7 @@ import lombok.Setter;
 public class GetClientDTO {
 
 	private Integer id;
+	private String userName;
 	private String name;
 	private String cpf;
 	private Set<String> emails;

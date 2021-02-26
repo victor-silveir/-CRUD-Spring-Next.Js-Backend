@@ -23,6 +23,12 @@ import lombok.Setter;
 public class PostClientDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message="O campo Usuário deve ser preenchido.")
+	private String userName;
+	
+	@NotEmpty(message="O campo Senha deve ser preenchido.")
+	private String password;
+	
 	@NotEmpty(message="O campo Nome deve ser preenchido.")
 	@Size(min = 3, max = 100, message = "O campo Nome deve ter entre 3 e 100 caracteres.")
 	@Pattern(regexp ="^[a-zA-Z0-9 ]+$", message="O campo nome deve ser preenchido apenas com caracteres alfanuméricos")
