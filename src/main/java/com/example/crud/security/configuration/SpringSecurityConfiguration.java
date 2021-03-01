@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.example.crud.security.JWTAuthenticationFilter;
+import com.example.crud.security.JWTAuthorizationFilter;
 import com.example.crud.security.JWTUtil;
 
 @Configuration
@@ -50,6 +51,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
+
 	}
 	
 	@Override
