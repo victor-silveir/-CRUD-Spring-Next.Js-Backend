@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.example.crud.entities.User;
 import com.example.crud.repositories.UserRepository;
@@ -23,6 +26,7 @@ public class CrudExamplebackendApplication implements CommandLineRunner{
 
 	public static void main(String[] args) {
 		SpringApplication.run(CrudExamplebackendApplication.class, args);
+		
 	}
 
 	@Override
@@ -43,6 +47,18 @@ public class CrudExamplebackendApplication implements CommandLineRunner{
 		userRepository.save(userAdmin);
 		userRepository.save(userCommon);
 		
+	}
+	
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedMethods("*")
+				.allowedOrigins("hp://localhost:8080")
+				.allowedHeaders("*");
+			}
+		};
 	}
 
 }
