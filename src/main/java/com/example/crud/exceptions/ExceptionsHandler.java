@@ -57,4 +57,11 @@ public class ExceptionsHandler {
 			
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
 	}
+	
+	@ExceptionHandler(TokenNotFoundException.class)
+	public ResponseEntity<StandardError> tokenNotFound(TokenNotFoundException e, HttpServletRequest req) {
+		
+		StandardError error = new StandardError(HttpStatus.UNAUTHORIZED.value(), e.getMessage(), df.format(new Date()));
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
+	}
 }

@@ -14,6 +14,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import com.example.crud.exceptions.TokenNotFoundException;
+
+import ch.qos.logback.classic.Logger;
+
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
 	private JWTUtil jwtUtil;
@@ -33,14 +37,18 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 		
 		String authorizationHeader = request.getHeader("Authorization");
 		
+		
+		
 		if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
 			UsernamePasswordAuthenticationToken authToken = getAuthentication(authorizationHeader.substring(7));
 			
 			if (authToken != null) {
 				SecurityContextHolder.getContext().setAuthentication(authToken);
 			}
+
+		} 
 			chain.doFilter(request, response);
-		}
+		
 		
 	}
 
