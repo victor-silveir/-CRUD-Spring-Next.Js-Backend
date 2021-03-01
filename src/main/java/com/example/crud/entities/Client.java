@@ -14,12 +14,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 	
 @Entity
-@AllArgsConstructor
-@Data
+@NoArgsConstructor
+@Getter
+@Setter
 public class Client implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -41,5 +43,20 @@ public class Client implements Serializable{
 	
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Phone> phones;
+
+	public Client(Integer id, String name, String cpf, String zipCode, String address, String complement,
+			String district, String city, String state) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.cpf = cpf;
+		this.zipCode = zipCode;
+		this.address = address;
+		this.complement = complement;
+		this.district = district;
+		this.city = city;
+		this.state = state;
+	}
 			
+	
 }

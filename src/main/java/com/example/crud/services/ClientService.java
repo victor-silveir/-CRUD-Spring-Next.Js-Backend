@@ -57,10 +57,11 @@ public class ClientService {
 	}
 	
 	public void delete(Client client) {
+		client = findById(client.getId());
 		clientRepository.delete(client);
 	}
 
-	//
+	//Auxiliar methods
 	public Client toCliente(PostClientDTO clientDto) {
 		return modelMapper.map(clientDto, Client.class);
 	}

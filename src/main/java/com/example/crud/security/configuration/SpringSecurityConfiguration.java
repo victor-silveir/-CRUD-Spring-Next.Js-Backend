@@ -1,7 +1,5 @@
 package com.example.crud.security.configuration;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,9 +19,6 @@ import com.example.crud.security.JWTUtil;
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-	@Autowired
-	private org.springframework.core.env.Environment env;
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -35,16 +30,15 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	};
 
-	private static final String[] PUBLIC_MATCHERS_GET = { "/clients/1" };
+	private static final String[] PUBLIC_MATCHERS_GET = { "/free/**" };
 
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
 		// Access h2-console
-		if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
+		
 			http.headers().frameOptions().disable();
-		}
 
 		http.cors().and().csrf().disable();
 		http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll()
@@ -68,5 +62,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
+	
 
 }

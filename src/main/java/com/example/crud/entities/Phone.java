@@ -61,11 +61,11 @@ public class Phone implements Serializable{
 		return client;
 	}
 
-	public PhoneType getTipo() {
+	public PhoneType getType() {
 		return PhoneType.toEnum(type);
 	}
 
-	public void setTipo(PhoneType type) {
+	public void setType(PhoneType type) {
 		this.type = type.getCod();
 	}
 

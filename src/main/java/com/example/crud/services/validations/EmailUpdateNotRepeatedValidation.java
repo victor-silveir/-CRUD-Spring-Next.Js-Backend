@@ -14,35 +14,38 @@ import org.springframework.web.servlet.HandlerMapping;
 import com.example.crud.entities.Client;
 import com.example.crud.repositories.ClientRepository;
 
-public class EmailUpdateNotRepeatedValidation implements ConstraintValidator<EmailUpdateNotRepeated, Collection<String>> {
-	
+public class EmailUpdateNotRepeatedValidation
+		implements ConstraintValidator<EmailUpdateNotRepeated, Collection<String>> {
+
 	@Autowired
 	ClientRepository clientRepository;
-	
+
 	@Autowired
 	HttpServletRequest req;
-	
+
 	@Override
 	public void initialize(EmailUpdateNotRepeated annotation) {
 	}
 
 	@Override
 	public boolean isValid(Collection<String> emails, ConstraintValidatorContext context) {
-		
-			@SuppressWarnings("unchecked")
-			Map<String, String> map = (Map<String, String>) req.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
-			
-			Integer idUri = Integer.parseInt(map.get("id"));
 
-		
-			List<Client> cli = clientRepository.findByEmailsIn(emails);
+		@SuppressWarnings("unchecked")
+		Map<String, String> map = (Map<String, String>) req
+				.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+
+		Integer idUri = Integer.parseInt(map.get("id"));
+
+		if (emails != null && !emails.isEmpty()) {
 			
+			List<Client> cli = clientRepository.findByEmailsIn(emails);
 			
 			for (Client client : cli) {
 				if (client != null && !idUri.equals(client.getId())) {
 					return false;
 				}
 			}
+		}
 		return true;
 
 	}
