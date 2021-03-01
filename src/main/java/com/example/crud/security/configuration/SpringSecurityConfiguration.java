@@ -37,6 +37,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	private static final String[] PUBLIC_MATCHERS_GET = { "/clients/1" };
 
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
@@ -47,7 +48,10 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		http.cors().and().csrf().disable();
 		http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll()
-				.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll().anyRequest().authenticated();
+				.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
+				.antMatchers(HttpMethod.POST, "/clients/").hasAnyAuthority("ROLE_ADMIN")
+				.antMatchers(HttpMethod.DELETE, "/clients/").hasAnyAuthority("ROLE_ADMIN")
+				.antMatchers(HttpMethod.PUT, "/clients/**").hasAnyAuthority("ROLE_ADMIN").anyRequest().authenticated();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));

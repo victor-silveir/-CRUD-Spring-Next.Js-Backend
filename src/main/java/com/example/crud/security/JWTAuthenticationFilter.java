@@ -13,7 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.example.crud.dtos.LoginClientDTO;
+import com.example.crud.dtos.LoginUserDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -32,7 +32,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			throws AuthenticationException {
 		
 		try {
-		LoginClientDTO clientCredentials = new ObjectMapper().readValue(request.getInputStream(), LoginClientDTO.class);
+		LoginUserDTO clientCredentials = new ObjectMapper().readValue(request.getInputStream(), LoginUserDTO.class);
 		
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(clientCredentials.getUserName(), clientCredentials.getPassword());
 		

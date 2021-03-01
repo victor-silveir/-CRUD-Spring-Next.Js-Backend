@@ -4,20 +4,15 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import com.example.crud.enums.Roles;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,12 +26,6 @@ public class Client implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	private String userName;
-	
-	@JsonIgnore
-	private String password;
-	
 	private String name;	
 	private String cpf;
 	private String zipCode;
@@ -52,23 +41,5 @@ public class Client implements Serializable{
 	
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Phone> phones;
-	
-	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "Roles")
-	private Set<Integer> roles = new HashSet<>();
-	
-	public Client() {
-		addRole(Roles.CLIENT);
-	}
-	
-	public Set<Roles> getRoles() {
-		return roles.stream().map(x -> Roles.toEnum(x)).collect(Collectors.toSet());
-	}
-	
-	public void addRole(Roles role) {
-		roles.add(role.getCod());
-	}
-
-
-		
+			
 }

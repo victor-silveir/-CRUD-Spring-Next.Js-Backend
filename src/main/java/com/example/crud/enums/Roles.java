@@ -3,7 +3,7 @@ package com.example.crud.enums;
 public enum Roles {
 
 	ADMIN(1, "ROLE_ADMIN"),
-	CLIENT(2, "ROLE_CLIENT");
+	COMMON(2, "ROLE_COMMON");
 	
 	private int cod;
 	private String description;

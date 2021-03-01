@@ -35,7 +35,6 @@ public class ClientService {
 
 	public Client save(Client client) {
 		client.setId(null);
-		client.setPassword(bCryptPasswordEncoder.encode(client.getPassword()));	
 		if (clientRepository.findByCpf(client.getCpf()) != null) {
 			throw new ObjectAlreadySavedException("Cliente com esse CPF já cadastrado, verifique o CPF informado. CPF: " + client.getCpf());
 		}
