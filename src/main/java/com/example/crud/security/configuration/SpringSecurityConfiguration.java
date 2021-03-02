@@ -1,8 +1,11 @@
 package com.example.crud.security.configuration;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,6 +28,9 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private JWTUtil jwtUtil;
+	
+	@Autowired
+	private Environment env;
 
 	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**",
 
@@ -37,8 +43,9 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		// Access h2-console
-		
+		if (Arrays.asList(env.getActiveProfiles()).contains("h2")) {
 			http.headers().frameOptions().disable();
+		}
 
 		http.cors().and().csrf().disable();
 		http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll()

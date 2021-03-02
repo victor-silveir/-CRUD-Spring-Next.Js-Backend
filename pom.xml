@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.crudexample</groupId>
-	<artifactId>CrudExamplebackend</artifactId>
+	<artifactId>CRUD-Spring-Next.Js-Backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>CrudExamplebackend</name>
 	<description>A simple Crud</description>
