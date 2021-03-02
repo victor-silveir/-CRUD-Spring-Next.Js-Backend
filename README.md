@@ -20,6 +20,7 @@ Sumário
         * [Login](#login)
         * [Requisições](#requisições-usuário-comum)
         * [Erros](#erros-nas-requisições)
+* [Considerações Finais](#considerações-finais)
 <!--te-->
 
 
