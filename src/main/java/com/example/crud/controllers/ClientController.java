@@ -46,7 +46,6 @@ public class ClientController {
 	public ResponseEntity<List<GetClientDTO>> findAllClientes() {
 		List<GetClientDTO> lista = clientService.findAll().stream().map(clientService::toGetClienteDTO)
 				.collect(Collectors.toList());
-		;
 		return ResponseEntity.ok().body(lista);
 	}
 

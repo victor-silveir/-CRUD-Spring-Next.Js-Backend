@@ -125,7 +125,7 @@ public class CrudExamplebackendApplication implements CommandLineRunner{
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**").allowedMethods("*")
-				.allowedOrigins("hp://localhost:8080")
+				.allowedOrigins("*")
 				.allowedHeaders("*");
 			}
 		};
