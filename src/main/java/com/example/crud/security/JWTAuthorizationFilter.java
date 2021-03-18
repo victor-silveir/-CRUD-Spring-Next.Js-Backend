@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,9 +40,6 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 				SecurityContextHolder.getContext().setAuthentication(authToken);
 
 			}
-		} else {
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			chain.doFilter(request, response);
 		}
 		chain.doFilter(request, response);
 

@@ -61,9 +61,9 @@ public class ClientController {
 		return ResponseEntity.ok().body(client);
 	}
 
-	@DeleteMapping(value = "/")
-	public ResponseEntity<Void> deleteCliente(@RequestBody GetClientDTO clientDto) {
-		clientService.delete(clientService.toCliente(clientDto));
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> deleteCliente(@PathVariable Integer id, @RequestBody GetClientDTO clientDto) {
+		clientService.delete(clientService.toCliente(clientDto), id);
 		return ResponseEntity.noContent().build();
 	}
 

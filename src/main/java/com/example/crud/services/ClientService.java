@@ -56,8 +56,8 @@ public class ClientService {
 		return clientRepository.save(client);
 	}
 	
-	public void delete(Client client) {
-		client = findById(client.getId());
+	public void delete(Client client, Integer id) {
+		client = findById(id);
 		clientRepository.delete(client);
 	}
 

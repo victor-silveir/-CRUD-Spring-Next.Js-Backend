@@ -64,15 +64,15 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().exceptionHandling().authenticationEntryPoint((req, rsp, e) -> {
 			
-			rsp.getWriter().write(new JSONObject() 
+			rsp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			rsp.setContentType("application/json;charset=UTF-8");
+			rsp.getOutputStream().write(new JSONObject() 
 					.put("timestamp", LocalDateTime.now())
 					.put("error", "Unauthorized")
 					.put("message", "Access denied")
-					.toString());
-			rsp.getWriter().flush();
-			rsp.getWriter().close();
-			rsp.setContentType("application/json;charset=UTF-8");
-			rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+					.toString().getBytes());
+			rsp.getOutputStream().flush();
+			rsp.getOutputStream().close();
 		});
 		
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
