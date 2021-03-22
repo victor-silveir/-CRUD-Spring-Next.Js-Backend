@@ -25,7 +25,6 @@ public class PostClientDTO implements Serializable{
 	
 	@NotEmpty(message="O campo Nome deve ser preenchido.")
 	@Size(min = 3, max = 100, message = "O campo Nome deve ter entre 3 e 100 caracteres.")
-	@Pattern(regexp ="^[a-zA-Z0-9 ]+$", message="O campo nome deve ser preenchido apenas com caracteres alfanuméricos")
 	private String name;
 	
 	@NotEmpty(message="O campo CPF deve ser preenchido.")
