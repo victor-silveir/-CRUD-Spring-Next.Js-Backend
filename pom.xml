@@ -12,8 +12,8 @@
 	<groupId>com.crudexample</groupId>
 	<artifactId>CRUD-Spring-Next.Js-Backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>CrudExamplebackend</name>
-	<description>A simple Crud</description>
+	<name>YourApp-Backend</name>
+	<description>An app to CRUD!</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

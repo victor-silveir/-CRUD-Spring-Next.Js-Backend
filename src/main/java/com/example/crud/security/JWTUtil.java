@@ -13,7 +13,7 @@ public class JWTUtil {
 
 	private static final String SECRET = "ASDKAFkaajsda!@%UYU:Ç^ÇLKTFDSASasdfgjho768690u6YERRT¨%&*(oi54235243%&*¨$(&*";
 
-	private static final Long EXPIRATION_TIME = 120000L;
+	private static final Long EXPIRATION_TIME = 1800000L;
 
 	public String generateToken(String username) {
 
